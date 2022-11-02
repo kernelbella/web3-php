@@ -395,7 +395,10 @@ class Utils
         }
         $bnt = new BigNumber(self::UNITS[$unit]);
 
-        return $bn->divide($bnt);
+        list($decimal, $precious) = $bn->divide($bnt);
+        $decimalStr  = $decimal->toString();
+        $preciousStr =  $precious->toString();
+        return $decimalStr . "." . str_pad($preciousStr,strlen(self::UNITS[$unit]) - strlen($decimalStr),"0",STR_PAD_LEFT);
     }
 
     /**
